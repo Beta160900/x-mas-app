@@ -11,6 +11,7 @@ import { receivedDataType, elementType } from "@/type/treeType";
 import Background from "@/components/Background";
 import LinkIcon from "@/vector/assets/icon/linkIcon";
 import CopyTabRed from "@/vector/assets/icon/copyTabRed";
+import save_png from "@/components/save_png";
 
 const CreatorPreview = () => {
   //fetch API here
@@ -59,6 +60,7 @@ const CreatorPreview = () => {
   function handleOpen() {
     setModalOpen(true);
   }
+
   if (isError) return <ErrorComponent message={`${error.message}`} />; // this need to be string
   if (isPending) return <Loader />;
   const pageElements = receivedData.elements.filter(
@@ -102,7 +104,12 @@ const CreatorPreview = () => {
 
           <div className="flex flex-row justify-evenly w-[393px]">
             {/*dave button */}
-            <div className="w-[124px] h-[41px] flex flex-row grad-commonred items-center justify-center rounded-[20.6px] hover:shadow-2xl">
+            <div
+              className="w-[124px] h-[41px] flex flex-row grad-commonred items-center justify-center rounded-[20.6px] hover:shadow-2xl"
+              onClick={async () => {
+                save_png(receivedData);
+              }}
+            >
               <p className="text-white ">SAVE</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

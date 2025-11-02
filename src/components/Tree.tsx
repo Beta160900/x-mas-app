@@ -22,6 +22,7 @@ type TreeProps = {
   displayMessage: boolean;
   animFadeIn?: boolean;
   onFacadeChange?: (isOpen: boolean) => void; //แก้ชั่วคราว
+  className?: string;
 };
 
 const Tree = ({
@@ -29,6 +30,7 @@ const Tree = ({
   displayMessage,
   animFadeIn,
   onFacadeChange,
+  className,
 }: TreeProps) => {
   const pageElementsList = [
     treeData.find((item) => item.position === 0) ?? blankFiller,
@@ -48,7 +50,7 @@ const Tree = ({
         draggable="false"
         className={`flex z-50 w-full justify-center items-center absolute top-0 left-0 h-full ${
           animFadeIn ? "anim-intro-fadeIn" : ""
-        }`}
+        } ${className}`}
       >
         <TreeVec className="min-w-[362px] w-[362px] h-auto mt-[-1vh] z-50 overflow-visible" />
 

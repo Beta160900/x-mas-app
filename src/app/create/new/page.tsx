@@ -7,6 +7,7 @@ import { auth } from "@/utils/firebase";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
 import Loader from "@/components/loading";
+import TreeVec from "@/vector/assets/tree";
 
 /** น่าจะมีไฟล์แยก? */
 const BACKGROUND_NAME = ["60TH YEAR BLD.", "55TH YEAR BLD."];
@@ -65,13 +66,13 @@ const New = () => {
 
         <div
           draggable="false"
-          className="flex justify-center fixed z-20 w-[100vw] max-w-[320px] bottom-[20vh]"
+          className="flex justify-center fixed z-20 w-screen max-w-[320px] bottom-[20vh]"
         >
-          <img draggable="false" src="/assets/tree.svg"></img>
+          <TreeVec />
         </div>
-        <div className="fixed bottom left-0 z-30 w-[100vw] h-[92vh]">
+        <div className="fixed bottom left-0 z-30 w-screen h-[92vh]">
           <div className="flex flex-col justify-between h-full">
-            <div className="anim-intro-fadeIn z-[80] flex items-center justify-around flex-col">
+            <div className="anim-intro-fadeIn z-80 flex items-center justify-around flex-col">
               <span className="text-grad-effect grad-intro italic font-inter">
                 choose your
               </span>

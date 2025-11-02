@@ -69,6 +69,7 @@ const CreatorView = () => {
     <>
       <div className="common-bg">
         <Background var={receivedData.background} />
+
         {/* title zone */}
         <div className="absolute z-50 flex w-full justify-center top-5 anim-intro-fadeIn">
           <div className="flex flex-col text-center">

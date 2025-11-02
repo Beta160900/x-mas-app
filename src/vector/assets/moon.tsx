@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { CSSProperties } from "react";
-const Moon: FC<{ className?: string; style: CSSProperties }> = ({
+const Moon: FC<{ className?: string; style?: CSSProperties }> = ({
   className,
   style,
 }) => {

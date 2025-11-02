@@ -1,8 +1,5 @@
 "use client";
-
-import { SAMPLEDATA } from "@/constants/SAMPLEDATA";
 import { elementType } from "@/type/treeType";
-import { toPng } from "html-to-image";
 import Moon from "@/vector/assets/moon";
 import {
   MOON_X,
@@ -12,7 +9,6 @@ import {
   TRANS_X,
 } from "@/constants/bg_const";
 import TreeVec from "@/vector/assets/tree";
-import { useRef } from "react";
 
 import { ITEM } from "@/constants/ITEMNAME";
 
@@ -22,6 +18,7 @@ import {
   ROTATION,
   CANE_FLIPX,
 } from "@/constants/decor_const";
+import { receivedDataType } from "@/type/treeType";
 
 const blankFiller = {
   page: -1,
@@ -58,22 +55,6 @@ const DecorOnTree = ({ position, type, display }: DecorOnTreeProps) => {
             })`,
           }}
         />
-        {/**
-           * <img
-          draggable="false"
-          src={`/assets/onTree/${NAME[type]}.svg`}
-          className={`${
-            type === 3 ? `scale-x-[${CANE_FLIPX[position]}]` : ""
-          } absolute w-[55px] z-[65] scale-100`}
-          style={{
-            marginTop: MARGINTOP[position],
-            marginLeft: MARGINLEFT[position],
-            transform: `rotate(${ROTATION[position]}) scaleX(${
-              type === 3 ? CANE_FLIPX[position] : "1"
-            })`,
-          }}
-        ></img>
-           */}
       </>
     );
   } else {
@@ -81,9 +62,8 @@ const DecorOnTree = ({ position, type, display }: DecorOnTreeProps) => {
   }
 };
 
-const Test = () => {
-  const receivedData = SAMPLEDATA;
-  const ref = useRef<HTMLDivElement>(null);
+const Make_png = (data: receivedDataType) => {
+  const receivedData = data;
 
   //tree data
   const pageElements: elementType[] =
@@ -106,46 +86,13 @@ const Test = () => {
   const moonX = MOON_X[receivedData.background];
   const moonY = MOON_Y[receivedData.background];
 
-  const handleExport = async () => {
-    if (ref.current) {
-      try {
-        const dataUrl = await toPng(ref.current, {
-          quality: 1,
-          pixelRatio: 2,
-          cacheBust: true,
-          backgroundColor: "#012e34", // Fallback color
-        });
-        const link = document.createElement("a");
-        link.download = "tree.png";
-        link.href = dataUrl;
-        link.click();
-      } catch (error) {
-        console.error("Error exporting image:", error);
-      }
-    }
-  };
-
-  //className="fixed h-[844px] w-[390px]"
-  /*
-   */
   return (
     <>
-      <div className="h-[960px] w-[540px] flex flex-col justify-end" ref={ref}>
+      <div className="h-[960px] w-[540px] flex flex-col justify-end">
         <div className="w-full h-[900px] overflow-hidden relative bg-(--sky-intro,radial-gradient(89.44%_41.26%_at_50%_54.46%,#00504c_0%,#012e34_100%))">
           {/* bg zone */}
           <div className="relative z-4 mt-[190px] flex flex-col items-end w-full justify-center">
             <div className="flex justify-center">
-              {/**
-               * <img
-                draggable="false"
-                className="relative z-[3] max-w-[none] max-h-[56vh] overflow-visible h-auto"
-                src={`/assets/background/${bgCurrent}.svg`}
-                style={{
-                  width: bgCurrentWidth,
-                  transform: `translateX(${TRANS_X[receivedData.background]})`,
-                }}
-              />
-               */}
               <Bg_component
                 className="relative z-3 max-w-none max-h-[56vh] overflow-visible h-auto"
                 style={{
@@ -156,17 +103,6 @@ const Test = () => {
             </div>
             <div className="bg-white z-2 w-full h-[25vh]"></div>
           </div>
-          {/**
-               * <img
-            draggable="false"
-            className="absolute z-[1] transition-all w-[170px]"
-            style={{
-              top: moonY,
-              left: moonX,
-            }}
-            src="/assets/moon.svg"
-          />
-               */}
           <Moon
             className="absolute z-1 transition-all w-[170px]"
             style={{
@@ -174,7 +110,6 @@ const Test = () => {
               left: moonX,
             }}
           />
-          {/* text zone */}
           <div className="absolute z-50 flex w-full justify-center top-5">
             <div className="flex flex-col text-center">
               <div className="align-top">
@@ -190,18 +125,10 @@ const Test = () => {
               </div>
             </div>
           </div>
-          {/* tree zone */}
           <div
             draggable="false"
             className="flex z-50 w-full justify-center items-center absolute top-0 left-0 h-full"
           >
-            {/**
-             * <img
-              draggable="false"
-              src="/assets/tree.svg"
-              className="min-w-[362px] w-[362px] h-auto mt-[-1vh] z-[50] overflow-visible"
-            ></img>
-             */}
             <TreeVec className="min-w-[362px] w-[362px] h-auto mt-[-1vh] z-50 overflow-visible" />
 
             {Array.from({ length: 9 }, (_, i) => (
@@ -216,18 +143,9 @@ const Test = () => {
               />
             ))}
           </div>
-          {/* link bar zone */}
         </div>
       </div>
-      <button
-        onClick={handleExport}
-        className="mt-4 p-2 bg-blue-500 text-white rounded"
-        style={{ position: "relative", zIndex: 9999 }}
-      >
-        Export as PNG
-      </button>
     </>
   );
 };
-
-export default Test;
+export default Make_png;
