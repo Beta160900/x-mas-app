@@ -11,6 +11,8 @@
 */
 
 "use client";
+import TitleText from "@/vector/assets/titletext";
+import TitleTree from "@/vector/assets/titletree";
 import Landing from "@/components/landing";
 
 const Home = () => {
@@ -21,18 +23,18 @@ const Home = () => {
           <div className="items-center flex-col justify-center" id="common-bg">
             <div className="w-auto h-auto pt-[20px]] flex items-center justify-center">
               <div className="anim-intro-fadeIn">
-                <img
-                  draggable="false"
-                  src="/assets/titletext.svg"
-                  className="max-h-[16vh]"
-                ></img>
-                <div className="transition-all flex justify-center mt-[-110px] overflow-hidden">
-                  <img
+                <TitleText className="max-h-[16vh] z-10" />
+                {/**
+                 * <img
                     draggable="false"
                     className="transition-all absolute min-w-[1800px]"
                     id="text"
                     src="/assets/titletree.svg"
                   />
+                 */}
+
+                <div className="transition-all flex justify-center mt-[-110px] overflow-hidden">
+                  <TitleTree className="absolute scale-90" />
                 </div>
               </div>
             </div>
@@ -40,7 +42,7 @@ const Home = () => {
 
           <div
             style={{ transform: "translate(-50%, 110%)" }}
-            className="absolute flex justify-center items-center z-[20] left-[50%] bottom-[15%]"
+            className="absolute flex justify-center items-center z-20 left-[50%] bottom-[15%]"
           >
             <Landing />
           </div>

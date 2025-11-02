@@ -1,10 +1,12 @@
-"use client"
+"use client";
 
 import Background from "@/components/Background";
 import { useState } from "react";
 //import { SAMPLEDATA } from "../SAMPLEDATA.tsx"; //wait for api
 import { auth } from "@/utils/firebase";
 import { useRouter } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
+import Loader from "@/components/loading";
 
 /** น่าจะมีไฟล์แยก? */
 const BACKGROUND_NAME = ["60TH YEAR BLD.", "55TH YEAR BLD."];
@@ -22,41 +24,36 @@ const New = () => {
   };
 
   const bgCurrentName = BACKGROUND_NAME[bgIndex];
-  //const creatorName = SAMPLEDATA.name; //WAIT FOR API
 
-  const handleCreate = async () => {
-    const user = auth.currentUser;
-    if (!user) return;
-    const idToken = await user.getIdToken(); // Firebase ID token
-    console.log("User ID token:", idToken);
-    /*const check = await fetch("/api/user/check", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: idToken, // if you use it in req.email
-      },
-    });
-    const checkData = await check.json();
-    if (checkData.id !== null) {
-      navigate(`/create/${checkData.id}`);
-      return;
-    }*/
-    const response = await fetch("/api/user/createTree", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: idToken, // if you use it in req.email
-      },
-      body: JSON.stringify({
-        bg: bgIndex, // send the selected background index
-      }),
-    });
-
-    const data = await response.json();
-    console.log(data); // unique user ID
-    router.push(`/create/${data.id}`);
-  };
-
+  //POST /api/user/createTree head->idTOKEN body->bg:bgIndex
+  const mutation = useMutation({
+    mutationFn: async (bgIndex: number) => {
+      const user = auth.currentUser;
+      //if (!user) throw new Error("User not logged in"); ใส่ในmiddleware
+      const idToken = await user?.getIdToken();
+      if (!idToken) throw new Error("no id token");
+      const res = await fetch("/api/user/createTree", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: idToken,
+        },
+        body: JSON.stringify({ bg: bgIndex }),
+      });
+      if (!res.ok) throw new Error("can't fetch");
+      const resJson = await res.json(); //{ check:true, reason: "User created", id: userId }
+      if (!resJson.check) throw new Error(resJson.reason);
+      return resJson.id;
+    },
+    onSuccess: (id) => {
+      router.push(`/create/${id}/preview`); //ค้างนึดหน่อย
+    },
+    onError: (error) => {
+      console.error(error.message);
+      alert(error.message);
+    },
+  });
+  if (mutation.isPending) return <Loader />;
   return (
     <>
       <div
@@ -129,7 +126,9 @@ const New = () => {
               </div>
               <div className="flex justify-center p-2">
                 <button
-                  onClick={handleCreate}
+                  onClick={() => {
+                    mutation.mutate(bgIndex);
+                  }}
                   className="grad-commonred p-3 px-6 rounded-full shadow-md hover:shadow-lg hover:scale-105 transition-all"
                 >
                   <div className="flex flex-row items-center jusitfy-between">

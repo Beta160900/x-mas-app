@@ -11,7 +11,7 @@ const TreeAtDecor = ({ receivedData, pageElements }: TreeAtDecorProps) => {
   return (
     <>
       <Background var={receivedData.background} />
-      <div className="absolute z-[50] flex w-full justify-center top-[20px] anim-intro-fadeIn">
+      <div className="absolute z-50 flex w-full justify-center top-5 anim-intro-fadeIn">
         <div className="flex flex-col text-center">
           <div className="align-top">
             <span className="text-white font-bold font-inter-noto text-[42px]">
@@ -21,7 +21,7 @@ const TreeAtDecor = ({ receivedData, pageElements }: TreeAtDecorProps) => {
               ‘s
             </span>
           </div>
-          <div className="text-white text-[25px] font-milonga mt-[-8px]">
+          <div className="text-white text-[25px] font-milonga -mt-2">
             <span>Christmas Tree</span>
           </div>
         </div>

@@ -1,3 +1,4 @@
+import CaneError from "@/vector/assets/caneError";
 import Link from "next/link";
 type ErrorProps = {
   message: string;
@@ -8,13 +9,9 @@ export default function ErrorComponent({ message }: ErrorProps) {
     <>
       <div className="items-center flex-col justify-center" id="common-bg">
         <div className="flex flex-col items-center justify-center h-full shadow-2xl ">
-          <img
-            draggable="false"
-            src="/assets/caneError.svg"
-            className="w-[182.065px] h-[188.57px] flex-shrink-0"
-          ></img>
+          <CaneError />
           <p
-            className="font-noto-sans-thai text-ivory text-[55.156px] font-[700] "
+            className="font-noto-sans-thai text-ivory text-[55.156px] font-bold "
             style={{
               fontStyle: "normal",
               lineHeight: "normal",
@@ -22,7 +19,7 @@ export default function ErrorComponent({ message }: ErrorProps) {
           >
             ERROR
           </p>
-          <p className="font-noto-sans-thai text-ivory font-[700] text-[20px]">
+          <p className="font-noto-sans-thai text-ivory font-bold text-[20px]">
             {message}
           </p>
           <Link href="/">

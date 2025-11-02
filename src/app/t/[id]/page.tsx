@@ -5,13 +5,14 @@ import Tree from "@/components/Tree";
 import Background from "@/components/Background";
 import TreeAtDecor from "@/components/TreeAtDecor";
 import DecoratorBox from "@/components/DecoratorBox";
-import { ITEMNAME, DISPLAYITEMNAME } from "@/constants/ITEMNAME";
+import { ITEM, ITEMNAME, DISPLAYITEMNAME } from "@/constants/ITEMNAME";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Loader from "@/components/loading";
 import { useEffect } from "react";
 import Link from "next/link";
 import { elementType } from "@/type/treeType"; //datatype
 import { useState } from "react";
+import WhiteArrow from "@/vector/assets/icon/whiteArrow";
 
 const HandleTree = () => {
   const router = useRouter();
@@ -125,13 +126,13 @@ const HandleTree = () => {
               <div className="w-full absolute flex flex-row justify-center">
                 <Link
                   href={`/t/${id}?page=-1`}
-                  className="bottom-[-85vh] font-inter font-bold text-[20px] py-3 absolute z-[300] w-[200px] text-center grad-commonred text-white rounded-full self-center"
+                  className="bottom-[-85vh] font-inter font-bold text-[20px] py-3 absolute z-300 w-[200px] text-center grad-commonred text-white rounded-full self-center"
                 >
                   DECORATE!
                 </Link>
                 <Link
                   href="/"
-                  className="absolute bottom-[-90vh] grad-commonred text-grad-effect font-bold italic z-[300] text-center underline decoration-[#901E25]"
+                  className="absolute bottom-[-90vh] grad-commonred text-grad-effect font-bold italic z-300 text-center underline decoration-[#901E25]"
                 >
                   CREATE YOUR OWN!
                 </Link>
@@ -142,27 +143,31 @@ const HandleTree = () => {
       );
     } else if (pageNumber == -1) {
       //PAGE -1: CHOOSE DECORATION
+      const ITEM_component = ITEM[itemNumber];
       return (
         <>
           <div className="common-bg absolute top-0 left-0 w-full h-full z-0">
             <span className="anim-intro-fadeIn">
               <Background var={receivedData.background} />
               <Tree treeData={pageElements} displayMessage={false} />
-              <div className="z-[150] blank-facade"></div>
-              <div className="flex flex-col justify-center w-full bottom-0 h-[60vh] items-center z-[300]">
-                <img
-                  className="h-[200px] z-[300] mt-[-150px]"
+              <div className="z-150 blank-facade"></div>
+              <div className="flex flex-col justify-center w-full bottom-0 h-[60vh] items-center z-300">
+                {/**
+                 * <img
+                  className="h-[200px] z-300 mt-[-150px]"
                   src={`/assets/onTree/${ITEMNAME[itemNumber]}.svg`}
                 ></img>
+                 */}
+                <ITEM_component className="h-[200px] z-300 mt-[-150px]" />
                 <p
-                  className="font-milonga text-[20px] z-[200] p-[10px] text-white"
+                  className="font-milonga text-[20px] z-200 p-2.5 text-white"
                   style={{
                     textShadow: "0 0 2.803px rgba(0, 0, 0, 0.89)",
                   }}
                 >
                   {DISPLAYITEMNAME[itemNumber]}
                 </p>
-                <div className="flex justify-center absolute w-full bottom-[380px] z-[5500]">
+                <div className="flex justify-center absolute w-full bottom-[440px] z-5500">
                   <div
                     className="absolute flex flex-col w-[300px] h-[350px] rounded-[30px]"
                     style={{
@@ -176,8 +181,8 @@ const HandleTree = () => {
                         Choose your item
                       </span>
                     </div>
-                    <div className="flex flex-col justify-center items-start h-[200px] mt-[10px] overflow-y-scroll scroll-decorator">
-                      <div className="flex flex-row flex-wrap justify-evenly justify-items-center pt-[60px]">
+                    <div className="flex flex-col justify-center items-start h-[200px] mt-2.5 overflow-y-scroll scroll-decorator">
+                      <div className="flex flex-row flex-wrap justify-evenly justify-items-center pt-30">
                         <DecoratorBox typeNumber={0} selecting={itemNumber} />
                         <DecoratorBox typeNumber={1} selecting={itemNumber} />
                         <DecoratorBox typeNumber={2} selecting={itemNumber} />
@@ -189,7 +194,7 @@ const HandleTree = () => {
                     </div>
 
                     <div
-                      className="flex justify-end p-[10px]"
+                      className="flex justify-end p-2.5"
                       onClick={toNextPgDecor}
                     >
                       <div className="flex flex-row items-center grad-commonred w-[125px] h-[41px] rounded-[20px] justify-center hover:shadow-2xl transition-all">
@@ -225,15 +230,15 @@ const HandleTree = () => {
             <span className="anim-intro-fadeIn">
               <Background var={receivedData.background} />
               <Tree treeData={pageElements} displayMessage={false} />
-              <div className="z-[150] blank-facade flex flex-row justify-center">
+              <div className="z-150 blank-facade flex flex-row justify-center">
                 <div className="flex flex-col items-center justify-center mb-[50px]">
-                  <p className="text-white font-inter text-[13px] p-[20px]">
+                  <p className="text-white font-inter text-[13px] p-5">
                     Type your name and message below
                   </p>
-                  <div className="grad-commonred text-ivory mb-[20px] font-inter-noto font-bold py-2 w-[150px] rounded-full text-center">
+                  <div className="grad-commonred text-ivory mb-5 font-inter-noto font-bold py-2 w-[150px] rounded-full text-center">
                     Type your name
                   </div>
-                  <div className="flex justify-center grad-intro-box rounded-[12px] w-[284px] h-[40px]">
+                  <div className="flex justify-center grad-intro-box rounded-xl w-[284px] h-10">
                     <input
                       id="nameInput"
                       placeholder="Type your name here.."
@@ -241,10 +246,10 @@ const HandleTree = () => {
                       className="border-transparent focus:border-transparent bg-transparent focus:ring-0 outline-none text-ivory font-inter-noto text-center"
                     ></input>
                   </div>
-                  <div className="grad-commonred text-ivory my-[20px] font-inter-noto font-bold py-2 w-[250px] rounded-full text-center">
+                  <div className="grad-commonred text-ivory my-5 font-inter-noto font-bold py-2 w-[250px] rounded-full text-center">
                     Type your message
                   </div>
-                  <div className="flex justify-center grad-intro-box rounded-[12px] w-[284px] h-[280px] pt-[20px]">
+                  <div className="flex justify-center grad-intro-box rounded-xl w-[284px] h-[280px] pt-5">
                     <textarea
                       id="nameInput"
                       placeholder="Type your message here.."
@@ -252,7 +257,7 @@ const HandleTree = () => {
                       className="border-transparent focus:border-transparent bg-transparent focus:ring-0 resize-none outline-none text-ivory font-inter-noto text-wrap w-[250px] max-h-[250px] mr-[-5px] overflow-y-scroll scroll-skyintro"
                     ></textarea>
                   </div>
-                  <div className="flex justify-end p-[10px]">
+                  <div className="flex justify-end p-2.5">
                     <div
                       onClick={async () => {
                         const name = (
@@ -317,31 +322,32 @@ const HandleTree = () => {
             displayMessage={true}
             onFacadeChange={setFacadeOpen}
           />
-          <div className="flex flex-col jusitfy-center absolute bottom-[50px] z-[140] w-full">
+          <div className="flex flex-col jusitfy-center absolute bottom-[50px] z-140 w-full">
             <p className="text-[#0A462F] font-inter text-[20.8px] text-center">
               Page {pageNumber}/{maxPage}
             </p>
           </div>
           {/** NEED TO REFINE WITH GRAPHIC */}
           <div className={`${isFacadeOpen ? "hidden" : ""}`}>
-            <div className="w-auto h-full left-0 flex flex-col justify-center z-[50] absolute px-[20px] items-center">
+            <div className="w-auto h-full left-0 flex flex-col justify-center z-50 absolute px-5 items-center">
               <button
                 onClick={prevPg}
                 className={`outline-none ${
                   pageNumber === 1 ? "invisible" : "visible"
                 }`}
               >
-                <img draggable="false" src="/assets/icon/whiteArrow.svg"></img>
+                {/**<img draggable="false" src="/assets/icon/whiteArrow.svg"></img> */}
+                <WhiteArrow />
               </button>
             </div>
-            <div className="w-auto h-full right-0 flex flex-col justify-center z-[50] absolute px-[20px] items-center">
+            <div className="w-auto h-full right-0 flex flex-col justify-center z-50 absolute px-5 items-center">
               <button
                 onClick={nextPg}
                 className={`scale-x-[-1] outline-none  ${
                   pageNumber === maxPage ? "invisible" : "visible"
                 }`}
               >
-                <img draggable="false" src="/assets/icon/whiteArrow.svg"></img>
+                <WhiteArrow />
               </button>
             </div>
           </div>

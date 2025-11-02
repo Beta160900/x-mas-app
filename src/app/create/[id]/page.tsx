@@ -8,7 +8,9 @@ import Loader from "@/components/loading";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { elementType, receivedDataType } from "@/type/treeType";
+import { elementType } from "@/type/treeType";
+import ErrorComponent from "@/components/error";
+import WhiteArrow from "@/vector/assets/icon/whiteArrow";
 
 const CreatorView = () => {
   const { id } = useParams<{ id: string }>();
@@ -58,7 +60,8 @@ const CreatorView = () => {
   }
 
   if (status === "error")
-    return <span>Error: {(error as Error)?.message}</span>;
+    return <ErrorComponent message={(error as Error)?.message} />;
+
   if (!receivedData || status === "pending") return <Loader />;
   return (
     //ใช้facadeOpenชั่วคราว
@@ -67,7 +70,7 @@ const CreatorView = () => {
       <div className="common-bg">
         <Background var={receivedData.background} />
         {/* title zone */}
-        <div className="absolute z-[50] flex w-full justify-center top-[20px] anim-intro-fadeIn">
+        <div className="absolute z-50 flex w-full justify-center top-5 anim-intro-fadeIn">
           <div className="flex flex-col text-center">
             <div className="align-top">
               <span className="text-white font-bold font-inter-noto text-[42px]">
@@ -77,7 +80,7 @@ const CreatorView = () => {
                 ‘s
               </span>
             </div>
-            <div className="text-white text-[25px] font-milonga mt-[-8px]">
+            <div className="text-white text-[25px] font-milonga -mt-2">
               <span>Christmas Tree</span>
             </div>
           </div>
@@ -92,33 +95,39 @@ const CreatorView = () => {
         <CopyLinkBar id={id} FacadeOpen={isFacadeOpen} />
         {/* button <> zone */}
         <div className={`${isFacadeOpen ? "hidden" : ""}`}>
-          <div className="w-auto h-full left-0 flex flex-col justify-center z-[50] absolute px-[20px] items-center">
+          <div className="w-auto h-full left-0 flex flex-col justify-center z-50 absolute px-5 items-center">
             <button
               onClick={prevPg}
               className={`outline-none ${
                 pageNumber === 1 ? "invisible" : "visible"
               }`}
             >
-              <img
+              {/**
+               * <img
                 draggable="false"
                 src="/assets/icon/whiteArrow.svg"
                 alt="Previous"
               />
+               */}
+              <WhiteArrow />
             </button>
           </div>
 
-          <div className="w-auto h-full right-0 flex flex-col justify-center z-[50] absolute px-[20px] items-center">
+          <div className="w-auto h-full right-0 flex flex-col justify-center z-50 absolute px-5 items-center">
             <button
               onClick={nextPg}
               className={`scale-x-[-1] outline-none ${
                 pageNumber === maxPage ? "invisible" : "visible"
               }`}
             >
-              <img
+              {/**
+               * <img
                 draggable="false"
                 src="/assets/icon/whiteArrow.svg"
                 alt="Next"
               />
+               */}
+              <WhiteArrow />
             </button>
           </div>
         </div>

@@ -2,6 +2,7 @@ import { auth, googleProvider } from "@/utils/firebase";
 import { signInWithPopup } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
+import G_icon from "@/vector/assets/icon/g-icon";
 import Loader from "./loading";
 
 export function Landing() {
@@ -49,12 +50,17 @@ export function Landing() {
       className="font-inter p-2 rounded-full font-bold text-xl text-white text-shadow-xl hover:shadow-2xl shadow-black transition-all"
     >
       <span className="flex items-center justify-center">
-        <img
+        {/**
+         * <img
           draggable="false"
           src="/assets/icon/g-icon.svg"
           alt="Google Icon"
           className="p-2"
         />
+        <G_icon className="mr-2" />
+         */}
+        <G_icon className="m-2" />
+
         <span className="text-[15px]">SIGN IN WITH GOOGLE</span>
       </span>
     </button>

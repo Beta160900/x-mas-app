@@ -1,0 +1,134 @@
+import { FC } from "react";
+const White_b: FC<{ className?: string }> = ({ className }) => {
+  return (
+    <svg
+      width="100"
+      height="100"
+      viewBox="0 0 100 100"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <mask
+        id="mask0_463_446"
+        style={{ maskType: "alpha" }}
+        maskUnits="userSpaceOnUse"
+        x="0"
+        y="0"
+        width="100"
+        height="100"
+      >
+        <circle cx="50" cy="50" r="50" fill="url(#paint0_radial_463_446)" />
+      </mask>
+      <g mask="url(#mask0_463_446)">
+        <circle cx="50" cy="50" r="50" fill="url(#paint1_radial_463_446)" />
+        <g filter="url(#filter0_f_463_446)">
+          <path
+            d="M15.5028 34.5071C21.6252 31.2122 26 56.6427 51.5 60.5014C66 62.6956 96.002 39.5021 91.5017 64.0019C87.0014 88.5018 60.999 100.002 32.4999 91.5018C8.83155 84.4426 -3.99787 45.0018 15.5028 34.5071Z"
+            fill="#8C807D"
+          />
+        </g>
+        <g filter="url(#filter1_f_463_446)">
+          <path
+            d="M85.5 33.7133C85.5 40.3409 66.1274 33.7133 59.5 33.7133C52.8726 33.7133 30 21.1276 30 14.5C30 7.87239 53 4.96435 64 7.71428C78 11.2144 85.5 27.0857 85.5 33.7133Z"
+            fill="white"
+          />
+        </g>
+        <g filter="url(#filter2_f_463_446)">
+          <path
+            d="M35.5 53.1448C35.5 59.7724 24.6274 61.6759 18 61.6759C11.3726 61.6759 9 52.2717 9 45.644C9 39.0164 11.5 32.927 22.5 35.6769C36.5 39.177 35.5 46.5172 35.5 53.1448Z"
+            fill="white"
+          />
+        </g>
+      </g>
+      <defs>
+        <filter
+          id="filter0_f_463_446"
+          x="-18.8205"
+          y="9.41338"
+          width="135.578"
+          height="109.669"
+          filterUnits="userSpaceOnUse"
+          color-interpolation-filters="sRGB"
+        >
+          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="BackgroundImageFix"
+            result="shape"
+          />
+          <feGaussianBlur
+            stdDeviation="0.15"
+            result="effect1_foregroundBlur_463_446"
+          />
+        </filter>
+        <filter
+          id="filter1_f_463_446"
+          x="18.8"
+          y="-4.51787"
+          width="77.9"
+          height="52.3766"
+          filterUnits="userSpaceOnUse"
+          color-interpolation-filters="sRGB"
+        >
+          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="BackgroundImageFix"
+            result="shape"
+          />
+          <feGaussianBlur
+            stdDeviation="5.6"
+            result="effect1_foregroundBlur_463_446"
+          />
+        </filter>
+        <filter
+          id="filter2_f_463_446"
+          x="-2.2"
+          y="23.8"
+          width="48.9156"
+          height="49.0758"
+          filterUnits="userSpaceOnUse"
+          color-interpolation-filters="sRGB"
+        >
+          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feBlend
+            mode="normal"
+            in="SourceGraphic"
+            in2="BackgroundImageFix"
+            result="shape"
+          />
+          <feGaussianBlur
+            stdDeviation="5.6"
+            result="effect1_foregroundBlur_463_446"
+          />
+        </filter>
+        <radialGradient
+          id="paint0_radial_463_446"
+          cx="0"
+          cy="0"
+          r="1"
+          gradientUnits="userSpaceOnUse"
+          gradientTransform="translate(57.5 39.5) rotate(97.0667) scale(60.9631)"
+        >
+          <stop stop-color="#FFFCEF" />
+          <stop offset="1" stop-color="#AEABAB" />
+        </radialGradient>
+        <radialGradient
+          id="paint1_radial_463_446"
+          cx="0"
+          cy="0"
+          r="1"
+          gradientUnits="userSpaceOnUse"
+          gradientTransform="translate(57.5 39.5) rotate(97.0667) scale(60.9631)"
+        >
+          <stop stop-color="#FFFCEF" />
+          <stop offset="1" stop-color="#AEABAB" />
+        </radialGradient>
+      </defs>
+    </svg>
+  );
+};
+export default White_b;

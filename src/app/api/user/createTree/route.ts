@@ -1,9 +1,11 @@
-import { NextRequest,NextResponse } from "next/server.js";
-import { db } from "@/utils/firebaseAdmin.js";
+import { NextRequest,NextResponse } from "next/server";
+import { db } from "@/utils/firebaseAdmin";
+import { verifyId } from "../verifyId";
 
 export async function POST(req:NextRequest) {
-    const [email, bg] = await req.json();
-    if (!email) return NextResponse.json({ check:false, reason: "Email not found in request" },{status:400});
+    const email= await verifyId(req);
+    if (!email) return NextResponse.json({ check:false, reason: "Email not found in request",id:null },{status:400});
+    const {bg} = await req.json();
     const userRef = db.collection("user").doc();//create new doc
     const userId = userRef.id;//new id
     await userRef.set({
